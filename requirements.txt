@@ -1,0 +1,7 @@
+plotly
+numpy
+dash
+dash-daq
+pandas
+sklearn
+dash-bootstrap-components
