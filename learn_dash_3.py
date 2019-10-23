@@ -24,32 +24,35 @@ def load_data(dataset):
     return df, targets, target_names
 
 df, targets, target_names = load_data(dataset_chosen)
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+# external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 app = dash.Dash(__name__,
-                # meta_tags=[{"name": "viewport", "content": "width=device-width, initial-scale=1"}],
-                external_stylesheets=[dbc.themes.BOOTSTRAP]
+                external_stylesheets=[dbc.themes.SOLAR]
                 )
 
 body = dbc.Container(
     [html.Div([
         html.Div(
             [
-                html.H5("Scatter Plots"),
+                html.H2("Scatter Plots"),
                 html.Br(),
-                html.P('Choose dataset'),
+                html.H4('Choose dataset'),
                 dcc.Dropdown(
                 id='choose-dataset',
                 options=[{'label': i, 'value': i} for i in ['iris', 'breast cancer']],
                 value='iris'
             ),
                 html.Br(),
-                html.P('Select columns to be chosen for X axis and Y axis')
+
             ],
 
         ),
 
         html.Div([
+            html.H4('Select columns to be chosen for X axis and Y axis'),]),
+
+        html.Div([
+
             html.Div(
                 [html.H6("X: axis")]
             ),
@@ -58,12 +61,18 @@ body = dbc.Container(
                 options=[{'label': i, 'value': i} for i in df.columns[:-1]],
                 value=df.columns[0]
             ),
+            html.Div(
+                [html.Br()]
+            ),
             dcc.RadioItems(
                 id='xaxis-type',
                 options=[{'label': i, 'value': i} for i in ['Linear', 'Log']],
                 value='Linear',
                 labelStyle={'display': 'inline-block'}
-            )
+            ),
+            html.Div(
+                [html.Br()]
+            ),
         ],
             style={'width': '48%', 'display': 'inline-block'}),
 
@@ -76,21 +85,37 @@ body = dbc.Container(
                 options=[{'label': i, 'value': i} for i in df.columns[:-1]],
                 value=df.columns[1]
             ),
+            html.Div(
+                [html.Br()]
+            ),
             dcc.RadioItems(
                 id='yaxis-type',
                 options=[{'label': i, 'value': i} for i in ['Linear', 'Log']],
                 value='Linear',
                 labelStyle={'display': 'inline-block'}
-            )
+            ),
+            html.Div(
+                [html.Br()]
+            ),
         ], style={'width': '48%', 'float': 'right', 'display': 'inline-block'})
     ]),
 
-    dcc.Graph(id='indicator-graphic'),]
+    dbc.Card(
+        dcc.Graph(id='indicator-graphic'),
+    ),
+
+    html.Div(
+            [html.Br()]
+    ),
+
+    ]
 )
 
-app.layout = html.Div([
 
-body
+
+
+app.layout = html.Div([
+    body
 ], className="mt-4",)
 
 @app.callback(
