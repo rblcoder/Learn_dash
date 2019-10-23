@@ -26,22 +26,29 @@ def load_data(dataset):
 df, targets, target_names = load_data(dataset_chosen)
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
-app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
+app = dash.Dash(__name__,
+                # meta_tags=[{"name": "viewport", "content": "width=device-width, initial-scale=1"}],
+                external_stylesheets=[dbc.themes.BOOTSTRAP]
+                )
 
-app.layout = html.Div([
-    html.Div([
+body = dbc.Container(
+    [html.Div([
         html.Div(
             [
                 html.H5("Scatter Plots"),
+                html.Br(),
+                html.P('Choose dataset'),
                 dcc.Dropdown(
                 id='choose-dataset',
                 options=[{'label': i, 'value': i} for i in ['iris', 'breast cancer']],
                 value='iris'
             ),
+                html.Br(),
                 html.P('Select columns to be chosen for X axis and Y axis')
             ],
 
         ),
+
         html.Div([
             html.Div(
                 [html.H6("X: axis")]
@@ -78,9 +85,13 @@ app.layout = html.Div([
         ], style={'width': '48%', 'float': 'right', 'display': 'inline-block'})
     ]),
 
-    dcc.Graph(id='indicator-graphic'),
+    dcc.Graph(id='indicator-graphic'),]
+)
 
-])
+app.layout = html.Div([
+
+body
+], className="mt-4",)
 
 @app.callback(
     Output('xaxis-column', 'options'),
