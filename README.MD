@@ -6,6 +6,6 @@
 
 + Scatter plot with dynamic field selection for axes  
 **Iris dataset**
-![Scatter plot with dynamic field selection for axes - iris dataset](assets/iris.png)
+![Scatter plot with dynamic field selection for axes - iris dataset](assets/iris_multiple_plots.png)
 **Breast cancer dataset**
-![Scatter plot with dynamic field selection for axes - breast cancer dataset](assets/breast_cancer.png)
+![Scatter plot with dynamic field selection for axes - breast cancer dataset](assets/breast_cancer_multiple_plots.png)
